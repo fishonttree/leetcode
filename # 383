@@ -1,0 +1,54 @@
+class Solution: # Initial solution, have each character in a list. Remove one of each from magazine and ransomNote per iteration.
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        magazine_letter = [element for element in magazine]
+        ransomNote_letter = [element for element in ransomNote]
+        commonLetter = []
+
+        for letter in ransomNote:
+            if letter in magazine_letter:
+                magazine_letter.remove(letter)
+                ransomNote_letter.remove(letter)
+            else:
+                return False
+
+        return len(ransomNote_letter) == 0
+
+# Using the count method works, however, the back-end optimization of methods are not always clear - questionable runtime.
+
+class Solution: # Another attempt, create dictionary for characters and how many of them there are in magazine and ransomNote.
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        ransomNoteDict = {}
+        magazineDict = {}
+        for letter in ransomNote:
+            ransomNoteDict.update({letter: 0})
+        for letter in magazine:
+            magazineDict.update({letter: 0})
+        for letter in ransomNote:
+            ransomNoteDict[letter] += 1
+        for letter in magazine:
+            magazineDict[letter] += 1
+        for key in ransomNoteDict:
+            if key not in magazineDict:
+                return False
+            if (ransomNoteDict[key] > magazineDict[key]):
+                return False
+        return True
+        
+class Solution: # Instead of creating the dictionary of 'demands', loop through each instance of ransomNote's unique letter.
+
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        
+        magazineDict = {}
+        for letter in magazine:
+            magazineDict.update({letter: 0})
+        for letter in magazine:
+            magazineDict[letter] += 1
+        
+        for letters in ransomNote:
+            if letters not in magazineDict:
+                return False
+
+            elif ransomNote.count(letters) > magazineDict[letters]:
+                return False
+
+        return True
