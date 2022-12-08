@@ -1,0 +1,19 @@
+class Solution:
+    def romanToInt(self, s = str) -> int:
+        roman_to_int = {
+            'I': 1, 
+            'V': 5, 
+            'X': 10, 
+            'L': 50, 
+            'C': 100, 
+            'D': 500, 
+            'M': 1000
+            }
+        int_total = 0
+        for character in range(0, len(s) - 1):
+            if roman_to_int[s[character]] < roman_to_int[s[character + 1]]:
+                int_total -= roman_to_int[s[character]]
+            else:
+                int_total += roman_to_int[s[character]]
+        int_total += roman_to_int[s[len(s) - 1]]
+        return int_total
