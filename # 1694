@@ -1,0 +1,16 @@
+class Solution: # Initial solution, picks numbers from the string and utilizes slicing.
+    def reformatNumber(self, string: str) -> str:
+        string = string.replace(' ', '').replace('-', '')
+        numberCluster = []
+        reformatVersion = ''
+        while len(string) > 4:
+            numberCluster.append(string[:3])
+            string = string[3:]
+        if len(string) == 4:
+            numberCluster.append(string[:2])
+            numberCluster.append(string[2:])
+        else:
+            numberCluster.append(string)
+        for cluster in numberCluster:
+            reformatVersion += cluster + '-'
+        return reformatVersion[:len(reformatVersion) - 1]    
