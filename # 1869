@@ -1,0 +1,28 @@
+class Solution: # Initial solution, a bit sloppy since the list unnecessarily keeps track of all continuous fragments of 1's and 0's.
+                # Alternatively, keeping track of the record is not necessary. Instead, consider using temporary maximum.
+
+    def checkZeroOnes(self, s: str) -> bool:
+        zeroCounter = 0
+        oneCounter = 0
+        counterRecord = {'0': 0, '1': 0}
+        for index in s:
+            if index == '0':
+                zeroCounter += 1
+                counterRecord['0'] = max(counterRecord['0'], zeroCounter)
+                oneCounter = 0
+            else:
+                oneCounter += 1
+                counterRecord['1'] = max(counterRecord['1'], oneCounter)
+                zeroCounter = 0
+            print(f"This is counterRecord {counterRecord}")
+        return counterRecord['1'] > counterRecord['0']
+        
+class Solution: # Sample solution, utilizes split by 1's and 0's to create a list of consecutive 1's and 0's to then compare the elements' lengths.
+               # Back-end optimization of methods are unclear, hence, the runtime of the split method isn't clear-cut.
+
+    def checkZeroOnes(self, s: str) -> bool:
+        zeroCluster = s.split('1')
+        oneCluster = s.split('0')
+        maxZero = max([len(item) for item in zeroCluster])
+        maxOne = max([len(item) for item in oneCluster])
+        return maxOne > maxZero
