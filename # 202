@@ -1,0 +1,38 @@
+class Solution: # Initial solution
+    def isHappy(self, n: int) -> bool:
+        squareSumList = []
+        squareSum = 0
+        
+        if n == 1:
+            return True
+    
+        while n != 1:
+            n = [digits for digits in str(n)]
+            for elements in n:
+                squareSum += int(elements)**2
+            n = squareSum
+            if (n in squareSumList) and len(squareSumList) > 1:
+                return False
+            elif n == 1:
+                return True
+            squareSumList.append(n)
+            squareSum = 0
+            
+class Solution: # Later solution
+    def isHappy(self, n: int) -> bool:
+        squareSumList = []
+        squareSum = 0
+        squareSumList.append(n)
+
+        while 1 not in squareSumList:
+            squareSum += pow(n % 10, 2)
+            if n == n % 10:
+                if squareSum in squareSumList:
+                    return False
+                else:
+                    n = squareSum
+                    squareSum = 0
+                    squareSumList.append(n)
+            else:
+                n //= 10
+        return True
