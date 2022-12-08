@@ -12,7 +12,7 @@ class Solution: # Initial solution
                 
         return num
         
-class Solution: # Smart-ass example
+class Solution: # Brilliant example
     def addDigits(self, num: int) -> int:
         if num == 0:
             return 0
