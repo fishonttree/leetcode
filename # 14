@@ -1,0 +1,34 @@
+class Solution: # Both solutions finds the shortest string and loop through to find similarity.
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        uniqueCommonPrefix = set()
+        stringLength = [len(word) for word in strs]
+        shortest_word = min(stringLength)
+        commonPrefixString = ""
+        if shortest_word == 0:
+            return commonPrefixString
+        for index in range(0, shortest_word):
+            for word in range(0, len(strs)):
+                uniqueCommonPrefix.add(strs[word][index])
+            if len(uniqueCommonPrefix) > 1:
+                break
+            else:
+                commonPrefixString += strs[word][index]
+                uniqueCommonPrefix = set()
+        return commonPrefixString
+               
+               
+class Solution: # This version checks whether there is nothing in common ahead of time.
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        uniqueCommonPrefix = set()
+        stringLength = [len(word) for word in strs]
+        shortest_word = min(stringLength)
+        commonPrefixString = ""
+        for index in range(0, shortest_word):
+            for word in range(0, len(strs)):
+                uniqueCommonPrefix.add(strs[word][index])
+            if len(uniqueCommonPrefix) > 1:
+                break
+            else:
+                commonPrefixString += strs[word][index]
+                uniqueCommonPrefix = set()
+        return commonPrefixString
