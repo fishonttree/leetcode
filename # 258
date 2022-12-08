@@ -1,0 +1,19 @@
+class Solution: # Initial solution
+    def addDigits(self, num: int) -> int:
+        digitSum = 0
+
+        while num % 10 != num:
+            digitSum += (num % 10)
+            num //= 10
+            if num < 10:
+                digitSum += (num % 10)
+                num = digitSum
+                digitSum = 0
+                
+        return num
+        
+class Solution: # Smart-ass example
+    def addDigits(self, num: int) -> int:
+        if num == 0:
+            return 0
+        return ((num - 1) % 9 + 1)
