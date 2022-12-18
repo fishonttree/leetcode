@@ -1,0 +1,21 @@
+""" The difficulty here is to not create a criteria for the solution that refers to nums, since that will cause errors to arise (i.e a number
+can add itself to meet the target, a number having dupe)
+
+class Solution: # Initial solution, quadratic runtime
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for index1 in range(len(nums)):
+            if target - nums[index1] not in nums:
+                pass
+            elif target - nums[index1] in nums:
+                for index2 in range(len(nums)):
+                    if nums[index2] + nums[index1] == target and index1 != index2:
+                        return [index1, index2]
+                        
+class Solution: # Sample solution, creates hash map to refer the solution criteria against.
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        numMap = dict()
+        for i in range(len(nums)): # Only loop through the list once and only look into each item once - no duplicate issue is possible.
+            complement = target - nums[i]
+            if complement in numMap:
+                return [numMap[complement], i] # If it does, then return the index of the list number in question and the dictionary's index.
+            numMap[nums[i]] = i # If the number doesn't exist in the hash map, create a key being that number with its index as value.
